@@ -1,3 +1,3 @@
-import CreateTask from './create-task.vue';
+import ACreateTask from './a-create-task.vue';
 
-export default CreateTask;
+export default ACreateTask;

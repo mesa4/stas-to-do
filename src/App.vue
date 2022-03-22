@@ -6,34 +6,8 @@
             </div>
             <div class="to-do__body">
                 <div class="to-do__task">
-                    <div v-if="!isEditing">
-                        <input
-                            v-model="taskName"
-                            type="text"
-                        >
-                        <button 
-                            type="submit"
-                            value="add"
-                            @click="storeTodo"
-                        >
-                            add
-                        </button>
-                    </div>
-
-                    <div v-else>
-                        <input
-                            v-model="taskName"
-                            type="text"
-                        >
-                        <button 
-                            type="submit"
-                            value="update"
-                            @click="updateTodo"
-                        >
-                            update
-                        </button>
-                    </div>
-
+                    <ACreateTask @createTask="handleCreateTask" />
+                  
                     <ol>
                         <li
                             v-for="(todo, index) in todoList" 
@@ -41,30 +15,37 @@
                         > 
                             {{ todo }}
 
-                            <button @click="editTodo(index)">
-                                edit
-                            </button>
-                            
-                            <button @click="deleteTodo(index)">
-                                delete
-                            </button>
-                        </li> 
+                            <!--                            <button @click="editTodo(index)">-->
+                            <!--                                edit-->
+                            <!--                            </button>-->
+                            <TheButton
+                                text="edit"
+                                @click.native="editTodo(index)"
+                            />
+
+                            <TheButton
+                                text="delete"
+                                @click.native="deleteTodo(index)"
+                            />
+                        </li>
                     </ol>
                 </div>
             </div>
         </div>
-        <!-- <AToDo /> -->
     </div>
 </template>
 
 <script>
-// import AToDo from '@/components/a-to-do';
+
+import TheButton from './components/the-button';
+import ACreateTask from "@/components/a-create-task/a-create-task";
 
 export default {
-    // name: 'App',
-    // components: {
-    //     AToDo
-    // }
+    name: 'App',
+    components: {
+        ACreateTask,
+        TheButton,
+    },
     data() {
         return {
             isEditing: false,
@@ -72,14 +53,16 @@ export default {
             title: 'Todo list',
             taskName: '',
             todoList: []
-        }; 
+        };
     },
-
     methods: {
-        storeTodo() {
-            this.todoList.push(this.taskName);
-            this.taskName = ''; 
+        handleCreateTask(value) {
+            this.todoList.push(value);
         },
+        // storeTodo() {
+        //     this.todoList.push(this.taskName);
+        //     this.taskName = '';
+        // },
         deleteTodo(index) {
             this.todoList.splice(index, 1);
         },
@@ -93,6 +76,7 @@ export default {
             this.isEditing = false;
             this.taskName = '';
         },
+
     }
 };
 </script>
