@@ -1,7 +1,7 @@
 <template>
     <div class="a-create-task">
         <form @submit.prevent="handleSubmit">
-            <input 
+            <input
                 v-model="taskName"
                 type="text"
             >
@@ -32,6 +32,7 @@ export default {
     methods: {
         handleSubmit: function () {
             this.$emit('createTask', this.taskName);
+            this.taskName = '';
         }
     }
 };
