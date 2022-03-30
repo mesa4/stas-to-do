@@ -15,6 +15,7 @@
                             :task-id="index"
                             @updateTask="handleUpdateTask"
                             @deleteTask="handleDeleteTask"
+                            @click="saveTodo"
                         />
                     </div>
                 </div>
@@ -43,15 +44,32 @@ export default {
             todoList: [],
         };
     },
+    mounted() {
+        if (localStorage.getItem('todoList')) {
+            try {
+                this.todoList = JSON.parse(localStorage.getItem('todoList'));
+            } catch (e){
+                localStorage.removeItem('todoList');
+            }
+        }
+    },
+
     methods: {
         handleCreateTask(value) {
             this.todoList.push(value);
+            this.saveTodo();
         },
         handleUpdateTask(taskObj) {
             this.todoList.splice(taskObj.taskId, 1, taskObj.taskName);
+            this.saveTodo();
         },
         handleDeleteTask(obj) {
             this.todoList.splice(obj.taskId, 1);
+            this.saveTodo();
+        },
+        saveTodo() {
+            const parsed = JSON.stringify(this.todoList);
+            localStorage.setItem('todoList', parsed);
         }
     }
 };
@@ -59,5 +77,3 @@ export default {
 
 <style lang="scss" src="./assets/scss/main.scss"/>
 
-<!--@click.native="editTodo(index, taskName)"-->
-<!--@click.native="deleteTodo(index)"-->
