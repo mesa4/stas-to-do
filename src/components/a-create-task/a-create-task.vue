@@ -29,23 +29,7 @@ export default {
             taskName: '',
         };
     },
-    // watch: {
-    //     '$store.state.list': {
-    //         handler() {
-    //             this.saveTodo();
-    //         },
-    //         immediate: true
-    //     }
-    // },
-    // mounted() {
-    //     if (localStorage.getItem('taskName')){
-    //         try {
-    //             this.taskName = JSON.parse(localStorage.getItem('taskName'));
-    //         } catch (e) {
-    //             localStorage.removeItem('taskName');
-    //         }
-    //     }
-    // },
+
     methods: {
         handleSubmit: function () {
             if (!this.taskName) {
@@ -54,11 +38,6 @@ export default {
             this.$emit('createTask', this.taskName);
             this.taskName = '';
         },
-        // saveTodo() {
-        //     const parsed = JSON.stringify(this.taskName);
-        //     localStorage.setItem('createTask', parsed);
-        // }
-
     }
 };
 </script>

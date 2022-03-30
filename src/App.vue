@@ -15,7 +15,6 @@
                             :task-id="index"
                             @updateTask="handleUpdateTask"
                             @deleteTask="handleDeleteTask"
-                            @click="saveTodo"
                         />
                     </div>
                 </div>
@@ -28,6 +27,7 @@
 
 import ACreateTask from "@/components/a-create-task/a-create-task";
 import TheToDoListItem from "@/components/the-to-do-list-item/the-to-do-list-item";
+import {setToStorage, getFromStorage} from "@/services/loca-storage-service";
 
 export default {
     name: 'App',
@@ -44,33 +44,48 @@ export default {
             todoList: [],
         };
     },
-    mounted() {
-        if (localStorage.getItem('todoList')) {
-            try {
-                this.todoList = JSON.parse(localStorage.getItem('todoList'));
-            } catch (e){
-                localStorage.removeItem('todoList');
-            }
+    watch: {
+        todoList: {
+            handler(value) {
+                setToStorage('todoList', value);
+            },
+            // deep: false,
+            // immediate: false
         }
     },
-
+    created() {
+        this.setInitialData();
+    },
+    // mounted() {
+    //     if (localStorage.getItem('todoList')) {
+    //         try {
+    //             this.todoList = JSON.parse(localStorage.getItem('todoList'));
+    //         } catch (e) {
+    //             localStorage.removeItem('todoList');
+    //         }
+    //     }
+    // },
     methods: {
         handleCreateTask(value) {
             this.todoList.push(value);
-            this.saveTodo();
+            // this.saveTodo();
         },
         handleUpdateTask(taskObj) {
             this.todoList.splice(taskObj.taskId, 1, taskObj.taskName);
-            this.saveTodo();
+            // this.saveTodo();
         },
         handleDeleteTask(obj) {
             this.todoList.splice(obj.taskId, 1);
-            this.saveTodo();
+            // this.saveTodo();
         },
-        saveTodo() {
-            const parsed = JSON.stringify(this.todoList);
-            localStorage.setItem('todoList', parsed);
+        // saveTodo() {
+        //     const parsed = JSON.stringify(this.todoList);
+        //     localStorage.setItem('todoList', parsed);
+        // },
+        setInitialData() {
+            this.todoList = getFromStorage('todoList') || [];
         }
+
     }
 };
 </script>
