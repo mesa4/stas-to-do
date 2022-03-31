@@ -1,3 +1,14 @@
 .a-create-task {
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        .test {
+            font-size: 20px;
+            background-color: black;
+            color: white;
+            width: 1000px;
+        }
+
 }
