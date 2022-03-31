@@ -3,6 +3,7 @@
         <form @submit.prevent="handleSubmit">
             <input
                 v-model="taskName"
+                class="test"
                 type="text"
             >
             <TheButton

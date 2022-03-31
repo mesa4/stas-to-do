@@ -7,16 +7,19 @@
             <div class="to-do__body">
                 <div class="to-do__task">
                     <ACreateTask @createTask="handleCreateTask" />
-                    <div>
+                    <transition-group
+                        name="list"
+                        tag="div"
+                    >
                         <TheToDoListItem
                             v-for="(todo, index) in todoList"
-                            :key="index"
+                            :key="todo"
                             :task-name="todo"
                             :task-id="index"
                             @updateTask="handleUpdateTask"
                             @deleteTask="handleDeleteTask"
                         />
-                    </div>
+                    </transition-group>
                 </div>
             </div>
         </div>

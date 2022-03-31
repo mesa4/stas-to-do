@@ -1,6 +1,9 @@
 <template>
     <div class="the-to-do-list-item">
-        <div v-if="!isEditMode">
+        <div
+            v-if="!isEditMode"
+            class="todo"
+        >
             {{ taskName }}
             <TheButton
                 text="edit"
@@ -11,7 +14,10 @@
                 @click.native="handleDeleteTask"
             />
         </div>
-        <div v-else>
+        <div
+            v-else
+            class="todo"
+        >
             <input
                 v-model="localTaskName"
                 type="text"
