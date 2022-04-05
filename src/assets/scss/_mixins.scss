@@ -1,0 +1,18 @@
+@mixin todo-input {
+  color: burlywood;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  outline: none;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+@mixin line-clamp($line-clamp: 1) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line-clamp;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}

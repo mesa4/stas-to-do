@@ -1,35 +1,45 @@
 <template>
     <div class="the-to-do-list-item">
-        <div
-            v-if="!isEditMode"
-            class="todo"
-        >
-            {{ taskName }}
-            <TheButton
-                text="edit"
-                @click.native="handleEditTask"
-            />
-            <TheButton
-                text="delete"
-                @click.native="handleDeleteTask"
-            />
-        </div>
-        <div
-            v-else
-            class="todo"
-        >
-            <input
-                v-model="localTaskName"
-                type="text"
-            >
-            <TheButton
-                text="save"
-                @click.native="handleUpdateTask"
-            />
-            <TheButton
-                text="cancel"
-                @click.native="handleCancelTask"
-            />
+        <div class="container">
+            <div class="to-do-list-item__inner">
+                <template
+                    v-if="!isEditMode"
+                >
+                    <div
+                        class="to-do-list-item__text"
+                        :title="taskName"
+                    >
+                        {{ taskName }}
+                    </div>
+                    <TheButton
+                        text="edit"
+                        class="to-do-list-item__button"
+                        @click.native="handleEditTask"
+                    />
+                    <TheButton
+                        text="delete"
+                        class="to-do-list-item__button"
+                        @click.native="handleDeleteTask"
+                    />
+                </template>
+                <template v-else>
+                    <input
+                        v-model="localTaskName"
+                        type="text"
+                        class="todo-input"
+                    >
+                    <TheButton
+                        text="save"
+                        class="to-do-list-item__button"
+                        @click.native="handleUpdateTask"
+                    />
+                    <TheButton
+                        text="cancel"
+                        class="to-do-list-item__button"
+                        @click.native="handleCancelTask"
+                    />
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -77,3 +87,5 @@ export default {
 };
 
 </script>
+
+<style lang="scss" src="./the-to-do-list-item.scss" />

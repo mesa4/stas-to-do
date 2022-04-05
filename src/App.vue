@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div class="a-to-do">
+        <div class="a-to-do container">
             <div class="to-do__header">
                 {{ title }}
             </div>
