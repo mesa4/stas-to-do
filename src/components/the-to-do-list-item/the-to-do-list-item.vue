@@ -39,6 +39,9 @@
                         @click.native="handleCancelTask"
                     />
                 </template>
+                <router-link :to="{ path: `/${taskId}` }">
+                    task details
+                </router-link>
             </div>
         </div>
     </div>
@@ -62,7 +65,6 @@ export default {
             required: true
         }
     },
-
     data() {
         return {
             isEditMode: false,
